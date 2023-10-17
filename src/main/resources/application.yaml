@@ -1,4 +1,23 @@
 spring:
+  profiles:
+    active: develop-mysql
+---
+spring:
+  config:
+    activate:
+      on-profile: develop-mysql
+  datasource:
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_PASSWORD}
+  flyway:
+    locations: classpath:/db/migration/mysql
+---
+spring:
+
+  config:
+    activate:
+      on-profile: develop-h2
   h2:
     console:
       enabled: true
