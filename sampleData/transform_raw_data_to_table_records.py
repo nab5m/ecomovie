@@ -59,7 +59,11 @@ for source_file_name in source_file_names:
 
         collection = json_data["belongs_to_collection"]
         if collection:
-            collection_dict[collection["id"]] = collection
+            collection_dict[collection["id"]] = {
+                "name": collection["name"],
+                "poster_path": collection["poster_path"],
+                "backdrop_path": collection["backdrop_path"]
+            }
         
         spoken_languages = json_data["spoken_languages"]
         for language in spoken_languages:
@@ -67,6 +71,7 @@ for source_file_name in source_file_names:
             language["language_name"] = language["name"]
             del language["name"]
 
+write_dictionary_data_to_file(collection_dict, "collections.json")
 write_dictionary_data_to_file(company_dict, "companies.json")
 write_dictionary_data_to_file(country_dict, "countries.json")
 write_dictionary_data_to_file(status_dict, "release_status.json")
