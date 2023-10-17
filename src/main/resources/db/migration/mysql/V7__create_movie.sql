@@ -1,9 +1,9 @@
 CREATE TABLE `movie` (
     `movie_id` INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    `movie_collection_id` INT UNSIGNED NOT NULL,
-    `original_language_id` INT UNSIGNED NOT NULL,
+    `movie_collection_id` INT UNSIGNED,
+    `original_language_id` INT UNSIGNED,
     `imdb_id` VARCHAR(30),
-    `original_title` VARCHAR(1024) NOT NULL,
+    `original_title` VARCHAR(1024),
     `overview` TEXT,
     `homepage` VARCHAR(1024),
     `backdrop_path` VARCHAR(1024),
