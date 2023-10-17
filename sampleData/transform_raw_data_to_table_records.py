@@ -24,6 +24,7 @@ country_dict = dict()
 collection_dict = dict()
 language_dict = dict()
 movie_list = list()
+content_production_company_list = list()
 
 source_file_names = glob.glob("./movie/movie_*.json")
 for source_file_name in source_file_names:
@@ -50,14 +51,6 @@ for source_file_name in source_file_names:
                 "code_item_name": genre["name"],
                 "code": genre["id"]
             }
-
-        production_companies = json_data["production_companies"]
-        for production_company in production_companies:
-            company_dict[production_company["id"]] = {
-                "company_name": production_company["name"],
-                "logo_path": production_company["logo_path"],
-                "company_country_id": production_company["origin_country"]
-            }
         
         production_countries = json_data["production_countries"]
         for production_country in production_countries:
@@ -81,7 +74,7 @@ for source_file_name in source_file_names:
             del language["name"]
         
         original_language = json_data['original_language']
-        movie_list.append({
+        movie = {
             "movie_collection_id": f"movie_collection_name_start {collection['name']} movie_collection_name_end" if collection and collection['name'] else '',
             "original_language_id": f"original_language_start {original_language} original_language_end" if original_language else '',
             "imdb_id": json_data["imdb_id"],
@@ -98,8 +91,24 @@ for source_file_name in source_file_names:
             "popularity": json_data["popularity"],
             "adult": json_data["adult"],
             "video": json_data["video"]
-        })
+        }
+        movie_list.append(movie)
 
+        production_companies = json_data["production_companies"]
+        for production_company in production_companies:
+            company_dict[production_company["id"]] = {
+                "company_name": production_company["name"],
+                "logo_path": production_company["logo_path"],
+                "company_country_id": production_company["origin_country"]
+            }
+
+            content_production_company_list.append({
+                "production_movie_id": f"production_movie_name_start {movie['original_title']} production_movie_name_end release_date_start {movie['release_date']} release_date_end",
+                "production_company_id": f"production_company_name_start {production_company['name']} production_company_name_end",
+                "content_type_code": 0
+            })
+
+write_list_data_to_file(content_production_company_list, "content_production_companies.json")
 write_list_data_to_file(movie_list, "movies.json")
 write_dictionary_data_to_file(collection_dict, "collections.json")
 write_dictionary_data_to_file(company_dict, "companies.json")
