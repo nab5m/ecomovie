@@ -1,6 +1,6 @@
 CREATE TABLE `content_production_company` (
     `content_production_company_id` INT PRIMARY KEY AUTO_INCREMENT,
-    `production_movie_id` INT NOT NULL,
+    `production_movie_id` INT,
     `production_company_id` INT NOT NULL,
     `content_type_code` INT NOT NULL,
     `creation_date_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,

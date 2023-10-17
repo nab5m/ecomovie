@@ -1,6 +1,6 @@
 CREATE TABLE `company` (
     `company_id` INT PRIMARY KEY AUTO_INCREMENT,
-    `company_country_id` INT NOT NULL,
+    `company_country_id` INT,
     `company_name` VARCHAR(256) NOT NULL,
     `logo_path` VARCHAR(1024),
     `creation_date_time` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
