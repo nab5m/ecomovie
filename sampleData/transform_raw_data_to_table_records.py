@@ -44,7 +44,11 @@ for source_file_name in source_file_names:
 
         production_companies = json_data["production_companies"]
         for production_company in production_companies:
-            company_dict[production_company["id"]] = production_company
+            company_dict[production_company["id"]] = {
+                "company_name": production_company["name"],
+                "logo_path": production_company["logo_path"],
+                "company_country_id": production_company["origin_country"]
+            }
         
         production_countries = json_data["production_countries"]
         for production_country in production_countries:
@@ -63,6 +67,7 @@ for source_file_name in source_file_names:
             language["language_name"] = language["name"]
             del language["name"]
 
+write_dictionary_data_to_file(company_dict, "companies.json")
 write_dictionary_data_to_file(country_dict, "countries.json")
 write_dictionary_data_to_file(status_dict, "release_status.json")
 write_dictionary_data_to_file(genre_dict, "genres.json")
