@@ -2,12 +2,18 @@ import glob
 import json
 import csv
 
-status_list = set()
-genre_list = dict()
-company_list = dict()
-country_list = dict()
-collection_list = dict()
-language_list = dict()
+def write_dictionary_data_to_file(data, filename):
+    language_list = list(data.values())
+
+    with open(filename, "w") as file:
+        file.write(json.dumps(language_list))
+
+status_set = set()
+genre_dict = dict()
+company_dict = dict()
+country_dict = dict()
+collection_dict = dict()
+language_dict = dict()
 
 source_file_names = glob.glob("./movie/movie_*.json")
 for source_file_name in source_file_names:
@@ -16,40 +22,34 @@ for source_file_name in source_file_names:
 
         json_data = json.load(source_file)
         
-        status_list.add(json_data["status"])
+        status_set.add(json_data["status"])
         
         genres = json_data["genres"]
         for genre in genres:
-            genre_list[genre["id"]] = genre["name"]
+            genre_dict[genre["id"]] = genre["name"]
 
         production_companies = json_data["production_companies"]
         for production_company in production_companies:
-            company_list[production_company["id"]] = production_company
+            company_dict[production_company["id"]] = production_company
         
         production_countries = json_data["production_countries"]
         for production_country in production_countries:
-            country_list[production_country["iso_3166_1"]] = production_country["name"]
-            
+            country_dict[production_country["iso_3166_1"]] = production_country["name"]
 
         collection = json_data["belongs_to_collection"]
         if collection:
-            collection_list[collection["id"]] = collection
+            collection_dict[collection["id"]] = collection
         
         spoken_languages = json_data["spoken_languages"]
         for language in spoken_languages:
-            language_list[language["iso_639_1"]] = language
+            language_dict[language["iso_639_1"]] = language
+            language["language_name"] = language["name"]
+            del language["name"]
 
-print(status_list)
-print(genre_list)
-print(company_list)
-print(country_list)
-print(collection_list)
-print(language_list)
+print(status_set)
+print(genre_dict)
+print(company_dict)
+print(country_dict)
+print(collection_dict)
 
-language_list = list(language_list.values())
-for language in language_list:
-    language["language_name"] = language["name"]
-    del language["name"]
-
-with open("languages.json", "w") as file:
-    file.write(json.dumps(language_list))
+write_dictionary_data_to_file(language_dict, "languages.json")
