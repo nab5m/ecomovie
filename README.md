@@ -24,3 +24,6 @@
 3. 추천 API 구현
 4. 번역 (Google Translate API)
 5. append_to_response
+
+## 샘플 데이터 출처
+- [Kaggle TMDB sample data](https://www.kaggle.com/datasets/edgartanaka1/tmdb-movies-and-series)
