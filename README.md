@@ -27,3 +27,6 @@
 
 ## 샘플 데이터 출처
 - [Kaggle TMDB sample data](https://www.kaggle.com/datasets/edgartanaka1/tmdb-movies-and-series)
+
+## 아쉬운 점
+- tmdb는 imdb와 데이터를 연결할 수 있도록 imdb_id 값을 저장하고 있다. 데이터를 가져올 때 tmdb_id라는 칼럼을 만들어 저장했으면 상호 참조할 때 더 좋을 것 같다.
