@@ -2,11 +2,19 @@ import glob
 import json
 import csv
 
-def write_dictionary_data_to_file(data, filename):
-    language_list = list(data.values())
-
+def write_list_data_to_file(data, filename):
     with open(filename, "w") as file:
-        file.write(json.dumps(language_list))
+        file.write(json.dumps(data))
+
+def write_dictionary_data_to_file(data, filename):
+    write_list_data_to_file(list(data.values()), filename)
+
+def find_status_code(status_dict, status):
+    for code_item in list(status_dict.values()):
+        if code_item["code_item_name"] == status:
+            return code_item["code"]
+    
+    return ''
 
 status_set = set()
 status_dict = dict()
@@ -15,6 +23,7 @@ company_dict = dict()
 country_dict = dict()
 collection_dict = dict()
 language_dict = dict()
+movie_list = list()
 
 source_file_names = glob.glob("./movie/movie_*.json")
 for source_file_name in source_file_names:
@@ -70,7 +79,28 @@ for source_file_name in source_file_names:
             language_dict[language["iso_639_1"]] = language
             language["language_name"] = language["name"]
             del language["name"]
+        
+        original_language = json_data['original_language']
+        movie_list.append({
+            "movie_collection_id": f"movie_collection_name_start {collection['name']} movie_collection_name_end" if collection and collection['name'] else '',
+            "original_language_id": f"original_language_start {original_language} original_language_end" if original_language else '',
+            "imdb_id": json_data["imdb_id"],
+            "original_title": json_data["original_title"],
+            "overview": json_data["overview"],
+            "homepage": json_data["homepage"],
+            "backdrop_path": json_data["backdrop_path"],
+            "poster_path": json_data["poster_path"],
+            "release_date": json_data["release_date"],
+            "release_status_code": find_status_code(status_dict, status) if status else '',
+            "budget": json_data["budget"],
+            "revenue": json_data["revenue"],
+            "runtime": json_data["runtime"],
+            "popularity": json_data["popularity"],
+            "adult": json_data["adult"],
+            "video": json_data["video"]
+        })
 
+write_list_data_to_file(movie_list, "movies.json")
 write_dictionary_data_to_file(collection_dict, "collections.json")
 write_dictionary_data_to_file(company_dict, "companies.json")
 write_dictionary_data_to_file(country_dict, "countries.json")
