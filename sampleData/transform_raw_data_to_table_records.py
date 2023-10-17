@@ -48,7 +48,10 @@ for source_file_name in source_file_names:
         
         production_countries = json_data["production_countries"]
         for production_country in production_countries:
-            country_dict[production_country["iso_3166_1"]] = production_country["name"]
+            country_dict[production_country["iso_3166_1"]] = {
+                "country_name": production_country["name"],
+                "iso_3166_1": production_country["iso_3166_1"]
+            }
 
         collection = json_data["belongs_to_collection"]
         if collection:
@@ -60,6 +63,7 @@ for source_file_name in source_file_names:
             language["language_name"] = language["name"]
             del language["name"]
 
+write_dictionary_data_to_file(country_dict, "countries.json")
 write_dictionary_data_to_file(status_dict, "release_status.json")
 write_dictionary_data_to_file(genre_dict, "genres.json")
 write_dictionary_data_to_file(language_dict, "languages.json")
