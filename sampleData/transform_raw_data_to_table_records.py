@@ -25,6 +25,7 @@ collection_dict = dict()
 language_dict = dict()
 movie_list = list()
 content_production_company_list = list()
+content_spoken_language_list = list()
 
 source_file_names = glob.glob("./movie/movie_*.json")
 for source_file_name in source_file_names:
@@ -67,12 +68,6 @@ for source_file_name in source_file_names:
                 "backdrop_path": collection["backdrop_path"]
             }
         
-        spoken_languages = json_data["spoken_languages"]
-        for language in spoken_languages:
-            language_dict[language["iso_639_1"]] = language
-            language["language_name"] = language["name"]
-            del language["name"]
-        
         original_language = json_data['original_language']
         movie = {
             "movie_collection_id": f"movie_collection_name_start {collection['name']} movie_collection_name_end" if collection and collection['name'] else '',
@@ -107,7 +102,20 @@ for source_file_name in source_file_names:
                 "production_company_id": f"production_company_name_start {production_company['name']} production_company_name_end",
                 "content_type_code": 0
             })
+        
+        spoken_languages = json_data["spoken_languages"]
+        for language in spoken_languages:
+            language_dict[language["iso_639_1"]] = language
+            language["language_name"] = language["name"]
+            del language["name"]
 
+            content_spoken_language_list.append({
+                "movie_id": f"movie_name_start {movie['original_title']} movie_name_end release_date_start {movie['release_date']} release_date_end",
+                "spoken_language_id": f"iso_639_1_start {language['iso_639_1']} iso_639_1_end",
+                "content_type_code": 0
+            })
+
+write_list_data_to_file(content_spoken_language_list, "content_spoken_languages.json")
 write_list_data_to_file(content_production_company_list, "content_production_companies.json")
 write_list_data_to_file(movie_list, "movies.json")
 write_dictionary_data_to_file(collection_dict, "collections.json")
