@@ -70,7 +70,6 @@ INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Galactic
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Triple Ajaxxx',NULL,NULL);
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Maloof Motion Pictures',NULL,NULL);
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Neo Art & Logic',NULL,NULL);
-INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('LivePlanet',NULL,NULL);
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Five Course Films',NULL,NULL);
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Carsey-Werner Company',NULL,NULL);
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Daniel Bobker Productions',NULL,NULL);
@@ -327,7 +326,6 @@ INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Beacon P
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Munich Film Partners & Company (MFP) BTC Productions',NULL,NULL);
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Pagoda Film',NULL,NULL);
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('NFH Films',NULL,NULL);
-INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Road Movies Filmproduktion',NULL,NULL);
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Cinema City Films',NULL,NULL);
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('HAL Films',NULL,NULL);
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Azoff Entertainment',NULL,NULL);
@@ -804,7 +802,6 @@ INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Cinema C
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Stockbridge-Hiller Productions',NULL,NULL);
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Astral Films',NULL,NULL);
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('The Harold Greenberg Fund',NULL,NULL);
-INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Union Générale Cinématographique (UGC)',NULL,NULL);
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Hachette Première',NULL,NULL);
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Constellation',NULL,NULL);
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Jerry Gershwin Productions',NULL,NULL);
@@ -1572,7 +1569,6 @@ INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Cofimage
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Studio Image 4',NULL,NULL);
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Colonia Media',NULL,NULL);
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('FilmInterest',NULL,NULL);
-INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Bavaria Film',NULL,NULL);
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Apipoulaï',NULL,NULL);
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Independent Feature Project',NULL,NULL);
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Katrin Seybold Film GmbH',NULL,NULL);
@@ -1929,7 +1925,6 @@ INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Stillkin
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Česká televize','/x3BUIowxU2skXOpnOeOkl7kIYDo.png',(SELECT country_id FROM country  WHERE iso_3166_1 = 'CZ'));
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Senator Film','/d5tPJd8jGLtJC5cp9NG0HeoTyoe.png',(SELECT country_id FROM country  WHERE iso_3166_1 = 'DE'));
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('X Filme Creative Pool','/9ps82gVzUeNdkjmLzoGDQLiLDio.png',(SELECT country_id FROM country  WHERE iso_3166_1 = 'DE'));
-INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('ARTE','/6UIpEURdjnmcJPwgTDRzVRuwADr.png',(SELECT country_id FROM country  WHERE iso_3166_1 = 'DE'));
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Westdeutscher Rundfunk','/3xFdKHLXPGHEbrAkmsepGE8974Y.png',(SELECT country_id FROM country  WHERE iso_3166_1 = 'DE'));
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Cinerenta Medienbeteiligungs KG',NULL,(SELECT country_id FROM country  WHERE iso_3166_1 = 'DE'));
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('RTL Television',NULL,(SELECT country_id FROM country  WHERE iso_3166_1 = 'DE'));
@@ -1955,12 +1950,10 @@ INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('MDR','/6
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Südwestrundfunk','/7MjDMOybX0D3fcIEpCyY9es5XZU.png',(SELECT country_id FROM country  WHERE iso_3166_1 = 'DE'));
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Tobis',NULL,(SELECT country_id FROM country  WHERE iso_3166_1 = 'DE'));
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('ARD/Degeto Film','/gtC63XG8fkFxszIuZIogffM1oY8.png',(SELECT country_id FROM country  WHERE iso_3166_1 = 'DE'));
-INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Constantin Film','/53JWq1rzbAXzbh1rnFo3XdqsAUh.png',(SELECT country_id FROM country  WHERE iso_3166_1 = 'DE'));
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Becker & Häberle Filmproduktion GmbH',NULL,(SELECT country_id FROM country  WHERE iso_3166_1 = 'DE'));
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Pandora Film','/3ngKBDqmPOjNCccrtyjZWhPsLFa.png',(SELECT country_id FROM country  WHERE iso_3166_1 = 'DE'));
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Terra-Filmkunst',NULL,(SELECT country_id FROM country  WHERE iso_3166_1 = 'DE'));
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Universum Film (UFA)',NULL,(SELECT country_id FROM country  WHERE iso_3166_1 = 'DE'));
-INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Constantin Film','/i7Z9ot2o3N5Sa3HrF09kniFs2y8.png',(SELECT country_id FROM country  WHERE iso_3166_1 = 'DE'));
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Roxy Film',NULL,(SELECT country_id FROM country  WHERE iso_3166_1 = 'DE'));
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Connexion Film',NULL,(SELECT country_id FROM country  WHERE iso_3166_1 = 'DE'));
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Ziegler Film',NULL,(SELECT country_id FROM country  WHERE iso_3166_1 = 'DE'));
@@ -2065,7 +2058,6 @@ INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Les Film
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Flach Film',NULL,(SELECT country_id FROM country  WHERE iso_3166_1 = 'FR'));
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Moby Dick Films',NULL,(SELECT country_id FROM country  WHERE iso_3166_1 = 'FR'));
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('ARTE France Cinéma','/huC7HqorvUThGIrENrbcHmQVUA0.png',(SELECT country_id FROM country  WHERE iso_3166_1 = 'FR'));
-INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('StudioCanal','/5LEHONGkZBIoWvp1ygHOF8iyi1M.png',(SELECT country_id FROM country  WHERE iso_3166_1 = 'FR'));
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('TF1 International',NULL,(SELECT country_id FROM country  WHERE iso_3166_1 = 'FR'));
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Les Films A4',NULL,(SELECT country_id FROM country  WHERE iso_3166_1 = 'FR'));
 INSERT INTO company(company_name,logo_path,company_country_id) VALUES ('Lou Yi',NULL,(SELECT country_id FROM country  WHERE iso_3166_1 = 'FR'));
