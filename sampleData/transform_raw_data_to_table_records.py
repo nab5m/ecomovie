@@ -9,9 +9,9 @@ def write_list_data_to_file(data, filename):
 def write_dictionary_data_to_file(data, filename):
     write_list_data_to_file(list(data.values()), filename)
 
-def find_status_code(status_dict, status):
-    for code_item in list(status_dict.values()):
-        if code_item["code_item_name"] == status:
+def find_code(code_dict, code_item_name):
+    for code_item in list(code_dict.values()):
+        if code_item["code_item_name"] == code_item_name:
             return code_item["code"]
     
     return ''
@@ -26,6 +26,7 @@ language_dict = dict()
 movie_list = list()
 content_production_company_list = list()
 content_spoken_language_list = list()
+content_genre_list = list()
 
 source_file_names = glob.glob("./movie/movie_*.json")
 for source_file_name in source_file_names:
@@ -43,14 +44,6 @@ for source_file_name in source_file_names:
                 "code_category_id": 0,
                 "code_item_name": status,
                 "code": count_before_add
-            }
-        
-        genres = json_data["genres"]
-        for genre in genres:
-            genre_dict[genre["id"]] = {
-                "code_category_id": 0,
-                "code_item_name": genre["name"],
-                "code": genre["id"]
             }
         
         production_countries = json_data["production_countries"]
@@ -79,7 +72,7 @@ for source_file_name in source_file_names:
             "backdrop_path": json_data["backdrop_path"],
             "poster_path": json_data["poster_path"],
             "release_date": json_data["release_date"],
-            "release_status_code": find_status_code(status_dict, status) if status else '',
+            "release_status_code": find_code(status_dict, status) if status else '',
             "budget": json_data["budget"],
             "revenue": json_data["revenue"],
             "runtime": json_data["runtime"],
@@ -114,7 +107,22 @@ for source_file_name in source_file_names:
                 "spoken_language_id": f"iso_639_1_start {language['iso_639_1']} iso_639_1_end",
                 "content_type_code": 0
             })
+        
+        genres = json_data["genres"]
+        for genre in genres:
+            genre_dict[genre["id"]] = {
+                "code_category_id": 0,
+                "code_item_name": genre["name"],
+                "code": genre["id"]
+            }
 
+            content_genre_list.append({
+                "movie_id": f"movie_name_start {movie['original_title']} movie_name_end release_date_start {movie['release_date']} release_date_end",
+                "content_type_code": 0,
+                "genre_code": genre["id"]
+            })
+
+write_list_data_to_file(content_genre_list, "content_genres.json")
 write_list_data_to_file(content_spoken_language_list, "content_spoken_languages.json")
 write_list_data_to_file(content_production_company_list, "content_production_companies.json")
 write_list_data_to_file(movie_list, "movies.json")
