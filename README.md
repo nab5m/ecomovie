@@ -21,6 +21,12 @@
       1. 원본 json을 가공하는 python script 작성
       2. insert sql 파일 생성
 2. 상세 API 구현
+   1. 엔티티 매핑
+   2. QueryDSL 설정
+   3. Controller, Service, Repository 구현
+   4. 테스트 코드 작성
+   5. Swagger 설정
+   6. CORS 확인
 3. 추천 API 구현
 4. 번역 (Google Translate API)
 5. append_to_response
