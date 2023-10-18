@@ -69,4 +69,6 @@ public class Movie {
 
     @Embedded
     private TimestampEmbeddable timestampEmbeddable;
+    
+    // ToDo: tagline 칼럼 누락됐음
 }
