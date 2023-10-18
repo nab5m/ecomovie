@@ -1,6 +1,8 @@
 package kr.ecocow.ecomovie.dto;
 
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.querydsl.core.annotations.QueryProjection;
 import kr.ecocow.ecomovie.entity.*;
 import lombok.AllArgsConstructor;
@@ -15,6 +17,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class MovieDetailsDTO {
     // ToDo: 응답으로 줄 때 snake_case로 변환하기
     
@@ -43,6 +46,7 @@ public class MovieDetailsDTO {
 
     @Builder
     @Getter
+    @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
     public static class MovieDTO {
         private Long id;
         private String imdbId;
@@ -88,6 +92,7 @@ public class MovieDetailsDTO {
 
     @Builder
     @Getter
+    @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
     public static class CollectionDTO {
         private Long id;
         private String name;
@@ -108,6 +113,7 @@ public class MovieDetailsDTO {
     @AllArgsConstructor
     @NoArgsConstructor
     @Getter
+    @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
     public static class GenreDTO {
         private Long id;
         private String name;
@@ -123,6 +129,7 @@ public class MovieDetailsDTO {
     @AllArgsConstructor
     @NoArgsConstructor
     @Getter
+    @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
     public static class ProductionCompanyDTO {
         private Long id;
         private String logoPath;
@@ -145,6 +152,7 @@ public class MovieDetailsDTO {
     @AllArgsConstructor
     @NoArgsConstructor
     @Getter
+    @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
     public static class ProductionCountryDTO {
         private String iso_3166_1;
         private String name;
@@ -160,6 +168,7 @@ public class MovieDetailsDTO {
     @AllArgsConstructor
     @NoArgsConstructor
     @Getter
+    @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
     public static class SpokenLanguageDTO {
         private String englishName;
         private String iso_639_1;
