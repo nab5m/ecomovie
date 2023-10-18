@@ -55,10 +55,10 @@ public class MovieRepository {
                                         qMovie,
                                         qCodeItem,
                                         qContentVoteSummary,
-                                        set(new QMovieDetailsDTO_GenreDTO(genreCode)),
-                                        set(new QMovieDetailsDTO_ProductionCompanyDTO(qCompany)),
-                                        set(new QMovieDetailsDTO_ProductionCountryDTO(qCountry)),
-                                        set(new QMovieDetailsDTO_SpokenLanguageDTO(qLanguage))
+                                        set(genreCode),
+                                        set(qCompany),
+                                        set(qCountry),
+                                        set(qLanguage)
                                 )
                         )
                 ).get(movieId);

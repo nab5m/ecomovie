@@ -5,13 +5,12 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.querydsl.core.annotations.QueryProjection;
 import kr.ecocow.ecomovie.entity.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Builder
 @AllArgsConstructor
@@ -24,24 +23,24 @@ public class MovieDetailsDTO {
     @JsonUnwrapped
     private MovieDTO movie;
     private CollectionDTO belongsToCollection;
-    private Set<GenreDTO> genres;
-    private Set<ProductionCompanyDTO> productionCompanies;
-    private Set<ProductionCountryDTO> productionCountries;
-    private Set<SpokenLanguageDTO> spokenLanguages;
+    private List<GenreDTO> genres;
+    private List<ProductionCompanyDTO> productionCompanies;
+    private List<ProductionCountryDTO> productionCountries;
+    private List<SpokenLanguageDTO> spokenLanguages;
 
     @QueryProjection
     public MovieDetailsDTO(Movie movie, CodeItem releaseStatus, ContentVoteSummary contentVoteSummary,
-                           Set<GenreDTO> genres, Set<ProductionCompanyDTO> productionCompanies,
-                           Set<ProductionCountryDTO> productionCountries, Set<SpokenLanguageDTO> spokenLanguages) {
+                           Set<CodeItem> genres, Set<Company> productionCompanies,
+                           Set<Country> productionCountries, Set<Language> spokenLanguages) {
         this.movie = MovieDTO.fromEntity(movie, releaseStatus, contentVoteSummary);
         Collection collection = movie.getCollection();
         if (collection != null) {
             this.belongsToCollection = CollectionDTO.fromEntity(collection);
         }
-        this.genres = genres;
-        this.productionCompanies = productionCompanies;
-        this.productionCountries = productionCountries;
-        this.spokenLanguages = spokenLanguages;
+        this.genres = genres.stream().map(GenreDTO::fromEntity).toList();
+        this.productionCompanies = productionCompanies.stream().map(ProductionCompanyDTO::fromEntity).toList();
+        this.productionCountries = productionCountries.stream().map(ProductionCountryDTO::fromEntity).toList();
+        this.spokenLanguages = spokenLanguages.stream().map(SpokenLanguageDTO::fromEntity).toList();
     }
 
     @Builder
@@ -118,10 +117,11 @@ public class MovieDetailsDTO {
         private Long id;
         private String name;
 
-        @QueryProjection
-        public GenreDTO(CodeItem codeItem) {
-            this.id = (long) codeItem.getCode();
-            this.name = codeItem.getCodeItemName();
+        public static GenreDTO fromEntity(CodeItem codeItem) {
+            return GenreDTO.builder()
+                    .id((long) codeItem.getCode())
+                    .name(codeItem.getCodeItemName())
+                    .build();
         }
     }
 
@@ -136,15 +136,13 @@ public class MovieDetailsDTO {
         private String name;
         private String originCountry;
 
-        @QueryProjection
-        public ProductionCompanyDTO(Company company) {
-            this.id = company.getCompanyId();
-            this.logoPath = company.getLogoPath();
-            this.name = company.getCompanyName();
-            Country country = company.getCountry();
-            if (country != null) {
-                this.originCountry = country.getIso_3166_1();
-            }
+        public static ProductionCompanyDTO fromEntity(Company company) {
+            return ProductionCompanyDTO.builder()
+                    .id(company.getCompanyId())
+                    .logoPath(company.getLogoPath())
+                    .name(company.getCompanyName())
+                    .originCountry(company.getCountry() != null ? company.getCountry().getIso_3166_1() : null)
+                    .build();
         }
     }
 
@@ -157,10 +155,11 @@ public class MovieDetailsDTO {
         private String iso_3166_1;
         private String name;
 
-        @QueryProjection
-        public ProductionCountryDTO(Country country) {
-            this.iso_3166_1 = country.getIso_3166_1();
-            this.name = country.getCountryName();
+        public static ProductionCountryDTO fromEntity(Country country) {
+            return ProductionCountryDTO.builder()
+                    .iso_3166_1(country.getIso_3166_1())
+                    .name(country.getCountryName())
+                    .build();
         }
     }
 
@@ -174,11 +173,12 @@ public class MovieDetailsDTO {
         private String iso_639_1;
         private String name;
 
-        @QueryProjection
-        public SpokenLanguageDTO(Language language) {
-            this.englishName = language.getEnglishName();
-            this.name = language.getLanguageName();
-            this.iso_639_1 = language.getIso_639_1();
+        public static SpokenLanguageDTO fromEntity(Language language) {
+            return SpokenLanguageDTO.builder()
+                    .englishName(language.getEnglishName())
+                    .iso_639_1(language.getIso_639_1())
+                    .name(language.getLanguageName())
+                    .build();
         }
     }
 }
