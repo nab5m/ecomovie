@@ -39,6 +39,16 @@ public class MovieRepository {
     private final BooleanExpression qContentGenreIsNotDeleted = qContentGenre.timestampEmbeddable.deletionDateTime.isNull();
     private final BooleanExpression qContentVoteSummaryIsNotDeleted = qContentVoteSummary.timestampEmbeddable.deletionDateTime.isNull();
 
+    public boolean checkMovieExists(Long movieId) {
+        Long count = jpaQueryFactory.from(qMovie)
+                .select(qMovie.count())
+                .where(qMovie.movieId.eq(movieId)
+                        .and(qMovieIsNotDeleted))
+                .fetchOne();
+
+        return count != null && count >= 1;
+    }
+
     public @Nullable MovieDetailsDTO findMovieDetails(Long movieId) {
         QCodeItem genreCode = new QCodeItem("genreCode");
 

@@ -29,4 +29,10 @@ public class MovieRepositoryTests {
     public void findMovieRecommendationList() {
         movieRepository.findMovieRecommendationList(List.of(1L, 2L));
     }
+
+    @Test
+    @DisplayName("checkMovieExists 쿼리 확인")
+    public void checkMovieExists() {
+        movieRepository.checkMovieExists(1L);
+    }
 }
