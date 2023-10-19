@@ -23,7 +23,7 @@ import static org.springframework.boot.autoconfigure.security.servlet.PathReques
 @EnableMethodSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
-    @Value("${spring.h2.console.enabled}")
+    @Value("${spring.h2.console.enabled:false}")
     private boolean h2ConsoleEnabled;
 
     @Bean

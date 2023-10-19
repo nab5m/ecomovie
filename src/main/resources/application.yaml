@@ -28,9 +28,6 @@ spring:
   config:
     activate:
       on-profile: develop-mysql
-  h2:
-    console:
-      enabled: false
   datasource:
     url: ${SPRING_DATASOURCE_URL}
     username: ${SPRING_DATASOURCE_USERNAME}
