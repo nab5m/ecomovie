@@ -15,4 +15,10 @@ public class MovieServiceTests {
     public void getMovieDetails() {
         movieService.getMovieDetails(1L);
     }
+
+    @Test
+    @DisplayName("getMovieRecommendationList 정상 작동하는지 확인")
+    public void getMovieRecommendationList() {
+        movieService.getMovieRecommendationList(1L, 0);
+    }
 }
