@@ -45,8 +45,7 @@ public class SecurityConfig {
                     .mvcMatchers(HttpMethod.GET, "/v3/api-docs").permitAll()
                     .mvcMatchers(HttpMethod.GET, "/v3/api-docs/*").permitAll()
                     .mvcMatchers(HttpMethod.GET, "/error").permitAll()
-                    .regexMatchers(HttpMethod.GET, "^/api/v1/movie/(\\d)+$").permitAll()
-                    .regexMatchers(HttpMethod.GET, "^/api/v1/movie/(\\d)+/recommendations").permitAll()
+                    .mvcMatchers(HttpMethod.GET, "/api/v1/movie/**").permitAll()
                     .anyRequest().authenticated();
         });
 
