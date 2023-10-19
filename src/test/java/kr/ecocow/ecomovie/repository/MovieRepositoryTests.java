@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.List;
-
 @SpringBootTest
 public class MovieRepositoryTests {
     @Autowired
@@ -21,6 +19,6 @@ public class MovieRepositoryTests {
     @Test
     @DisplayName("findRecommendedMovieIdList 쿼리 확인")
     public void findRecommendedMovieIdList() {
-        movieRepository.findRecommendedMovieIdList(1L);
+        movieRepository.findMovieRecommendationIdList(1L);
     }
 }

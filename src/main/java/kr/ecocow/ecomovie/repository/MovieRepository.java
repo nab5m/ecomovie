@@ -73,8 +73,7 @@ public class MovieRepository {
                 ).get(movieId);
     }
 
-    // ToDo: 페이지네이션
-    public List<Long> findRecommendedMovieIdList(Long movieId) {
+    public List<Long> findMovieRecommendationIdList(Long movieId) {
         int collectionScoreWeight = 5;
         int genreScoreWeight = 3;
         int productionCompanyWeight = 2;
