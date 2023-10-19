@@ -36,6 +36,8 @@ public class MovieRepository {
 
     // ToDo: Q객체를 직접 만드는 경우 해당 Q객체에 대한 조건으로 사용할 것
     private final BooleanExpression qMovieIsNotDeleted = qMovie.timestampEmbeddable.deletionDateTime.isNull();
+    private final BooleanExpression qContentGenreIsNotDeleted = qContentGenre.timestampEmbeddable.deletionDateTime.isNull();
+    private final BooleanExpression qContentVoteSummaryIsNotDeleted = qContentVoteSummary.timestampEmbeddable.deletionDateTime.isNull();
 
     public @Nullable MovieDetailsDTO findMovieDetails(Long movieId) {
         QCodeItem genreCode = new QCodeItem("genreCode");
@@ -134,5 +136,21 @@ public class MovieRepository {
 
         return entityManager.createNativeQuery(findRecommendedMovieIdList)
                 .getResultList();
+    }
+
+    public List<MovieRecommendationDTO> findMovieRecommendationList(List<Long> movieIdList) {
+        return jpaQueryFactory.from(qMovie)
+                .leftJoin(qMovie.language)
+                .leftJoin(qContentGenre).on(qContentGenre.movie.eq(qMovie))
+                .leftJoin(qContentVoteSummary).on(qContentVoteSummary.movie.eq(qMovie))
+                .where(qMovie.movieId.in(movieIdList)
+                        .and(qMovieIsNotDeleted)
+                        .and(qContentGenreIsNotDeleted)
+                        .and(qContentVoteSummaryIsNotDeleted))
+                .transform(
+                        groupBy(qMovie.movieId).list(
+                                new QMovieRecommendationDTO(qMovie, set(qContentGenre), qContentVoteSummary)
+                        )
+                );
     }
 }
