@@ -36,8 +36,12 @@ public class MovieService {
         int totalResults = movieIdList.size();
         int totalPages = totalResults == 0 ? 1 : (totalResults - 1) / rowPerPage + 1;
 
-        List<Long> paginatedMovieIdList = movieIdList.subList((rowPerPage - 1) * page, rowPerPage * page);
-        List<MovieRecommendationDTO> results = movieRepository.findMovieRecommendationList(paginatedMovieIdList);
+        List<MovieRecommendationDTO> results = List.of();
+
+        if (0 < page && page <= totalPages) {
+            List<Long> paginatedMovieIdList = movieIdList.subList(rowPerPage * (page - 1), Math.min(rowPerPage * page, totalResults));
+            results = movieRepository.findMovieRecommendationList(paginatedMovieIdList);;
+        }
 
         return MovieRecommendationResponseDTO.builder()
                 .page(page)
@@ -45,6 +49,5 @@ public class MovieService {
                 .totalPages(totalPages)
                 .totalResults(totalResults)
                 .build();
-
     }
 }
