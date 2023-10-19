@@ -33,8 +33,9 @@
       - 최종점수 = 중간점수 + (투표평점 * 가중치, 인기지수 * 가중치)
    2. Controller 404 응답 처리
    3. 페이징 처리
-4. 번역 (Google Translate API)
+4. 번역 (파파고 번역 API)
 5. append_to_response
+6. 배포
 
 ## 샘플 데이터 출처
 - [Kaggle TMDB sample data](https://www.kaggle.com/datasets/edgartanaka1/tmdb-movies-and-series)
