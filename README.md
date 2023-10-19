@@ -28,6 +28,11 @@
    5. Swagger 설정
    6. CORS 확인
 3. 추천 API 구현
+   1. 쿼리 설계
+      - 중간점수 = 컬렉션 +5점, 장르 +3점, 제작사 +2점
+      - 최종점수 = 중간점수 + (투표평점 * 가중치, 인기지수 * 가중치)
+   2. Controller 404 응답 처리
+   3. 페이징 처리
 4. 번역 (Google Translate API)
 5. append_to_response
 
