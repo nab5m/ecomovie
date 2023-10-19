@@ -145,7 +145,10 @@ public class MovieRepository {
                         + " + popularity * " + popularityWeight + ") DESC; ";
 
         return entityManager.createNativeQuery(findRecommendedMovieIdList)
-                .getResultList();
+                .getResultList()
+                .stream()
+                .map(resultMovieId -> (Long.parseLong(String.valueOf(resultMovieId))))
+                .toList();
     }
 
     public List<MovieRecommendationDTO> findMovieRecommendationList(List<Long> movieIdList) {
