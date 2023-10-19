@@ -22,7 +22,7 @@ public class MovieService {
     }
 
     @Transactional(readOnly = true)
-    // page는 0부터 시작
+    // page는 1부터 시작
     public @Nullable List<MovieRecommendationDTO> getMovieRecommendationList(Long movieId, int page) {
         boolean movieExists = movieRepository.checkMovieExists(movieId);
         if (!movieExists) {
@@ -32,7 +32,7 @@ public class MovieService {
         List<Long> movieIdList = movieRepository.findMovieRecommendationIdList(movieId);
 
         int rowPerPage = 20;
-        List<Long> paginatedMovieIdList = movieIdList.subList(rowPerPage * page, rowPerPage * (page + 1));
+        List<Long> paginatedMovieIdList = movieIdList.subList((rowPerPage - 1) * page, rowPerPage * page);
         return movieRepository.findMovieRecommendationList(paginatedMovieIdList);
     }
 }
