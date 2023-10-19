@@ -19,6 +19,6 @@ public class MovieServiceTests {
     @Test
     @DisplayName("getMovieRecommendationList 정상 작동하는지 확인")
     public void getMovieRecommendationList() {
-        movieService.getMovieRecommendationList(1L, 0);
+        movieService.getMovieRecommendationList(1L, 1);
     }
 }
