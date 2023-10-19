@@ -4,12 +4,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import kr.ecocow.ecomovie.controller.exception.NotFoundException;
 import kr.ecocow.ecomovie.controller.swagger.MovieControllerDocs;
 import kr.ecocow.ecomovie.dto.MovieDetailsDTO;
+import kr.ecocow.ecomovie.dto.MovieRecommendationResponseDTO;
 import kr.ecocow.ecomovie.service.MovieService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/movie")
@@ -18,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class MovieController {
     private final MovieService movieService;
 
-    public static final String MOVIE_DETAILS_NOT_FOUND_MESSAGE = "존재하지 않는 영화입니다.";
+    public static final String MOVIE_NOT_FOUND_MESSAGE = "존재하지 않는 영화입니다.";
 
     @GetMapping("{movieId}")
     @MovieControllerDocs.GetMovieDetails
@@ -26,9 +24,23 @@ public class MovieController {
         MovieDetailsDTO movieDetailsDTO = movieService.getMovieDetails(movieId);
 
         if (movieDetailsDTO == null) {
-            throw new NotFoundException(MOVIE_DETAILS_NOT_FOUND_MESSAGE);
+            throw new NotFoundException(MOVIE_NOT_FOUND_MESSAGE);
         }
 
         return movieDetailsDTO;
+    }
+
+    @GetMapping("{movieId}/recommendations")
+    @MovieControllerDocs.GetMovieRecommendations
+    public MovieRecommendationResponseDTO getMovieRecommendations(@PathVariable long movieId,
+                                                                  @RequestParam(defaultValue = "1") int page)
+    {
+        MovieRecommendationResponseDTO movieRecommendationResponseDTO = movieService.getMovieRecommendationList(movieId, page);
+
+        if (movieRecommendationResponseDTO == null) {
+            throw new NotFoundException(MOVIE_NOT_FOUND_MESSAGE);
+        }
+
+        return movieRecommendationResponseDTO;
     }
 }

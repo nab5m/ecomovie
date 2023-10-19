@@ -24,4 +24,11 @@ public class MovieControllerTests {
         long movieId = 1L;
         mockMvc.perform(get("/api/v1/movie/" + movieId));
     }
+
+    @Test
+    @DisplayName("영화 추천 목록 조회 정상 작동하는지 확인")
+    public void getMovieRecommendationsSuccess() throws Exception {
+        long movieId = 1L;
+        mockMvc.perform(get("/api/v1/movie/" + movieId + "/recommendations"));
+    }
 }
