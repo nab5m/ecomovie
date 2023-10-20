@@ -3,9 +3,21 @@ spring:
     active: develop-mysql
     group:
       develop-h2:
+        - common
         - develop
       develop-mysql:
+        - common
         - develop
+---
+spring:
+  config:
+    activate:
+      on-profile: common
+naver:
+  developers:
+    client:
+      id: ${NAVER_DEVELOPERS_CLIENT_ID:}
+      secret: ${NAVER_DEVELOPERS_CLIENT_SECRET:}
 ---
 spring:
   config:

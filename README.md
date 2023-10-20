@@ -12,6 +12,9 @@
   - 예시 : ecomovie
 - SPRING_DATASOURCE_PASSWORD
   - 예시 : ecomovie12
+2.  (선택) 번역 기능을 사용하기 위해서는 네이버 개발자센터 API 키를 환경변수에 설정해야합니다. [네이버 개발자센터 바로가기](NAVER_DEVELOPERS_CLIENT_ID)
+- NAVER_DEVELOPERS_CLIENT_ID
+- NAVER_DEVELOPERS_CLIENT_SECRET
 
 ## 구현 계획
 1. DB 구조 설계 및 샘플 데이터 추가
