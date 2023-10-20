@@ -24,9 +24,6 @@ public class MovieService {
         if (movieDetailsDTO == null) {
             return null;
         }
-        if (movieDetailsRequestDTO == null) {
-            return movieDetailsDTO;
-        }
 
         movieDetailsDTO = translateMovieTitle(movieDetailsRequestDTO, movieDetailsDTO);
         movieDetailsDTO = appendToMovieDetailsResponse(movieDetailsRequestDTO, movieDetailsDTO);
@@ -55,7 +52,11 @@ public class MovieService {
         return movieDetailsDTO.withTitle(translatedTitle);
     }
 
-    private MovieDetailsDTO appendToMovieDetailsResponse(MovieDetailsRequestDTO movieDetailsRequestDTO, MovieDetailsDTO movieDetailsDTO) {
+    private MovieDetailsDTO appendToMovieDetailsResponse(@Nullable MovieDetailsRequestDTO movieDetailsRequestDTO, MovieDetailsDTO movieDetailsDTO) {
+        if (movieDetailsRequestDTO == null) {
+            return movieDetailsDTO;
+        }
+
         AppendToResponse appendToResponse = movieDetailsRequestDTO.getAppend_to_response();
         if (appendToResponse == null) {
             return movieDetailsDTO;
