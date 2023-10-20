@@ -5,10 +5,13 @@ import kr.ecocow.ecomovie.controller.exception.NotFoundException;
 import kr.ecocow.ecomovie.controller.swagger.MovieControllerDocs;
 import kr.ecocow.ecomovie.dto.MovieDetailsDTO;
 import kr.ecocow.ecomovie.dto.MovieDetailsRequestDTO;
+import kr.ecocow.ecomovie.dto.MovieRecommendationRequestDTO;
 import kr.ecocow.ecomovie.dto.MovieRecommendationResponseDTO;
 import kr.ecocow.ecomovie.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/movie")
@@ -36,9 +39,9 @@ public class MovieController {
     @GetMapping("{movieId}/recommendations")
     @MovieControllerDocs.GetMovieRecommendations
     public MovieRecommendationResponseDTO getMovieRecommendations(@PathVariable long movieId,
-                                                                  @RequestParam(defaultValue = "1") int page)
+                                                                  @Valid MovieRecommendationRequestDTO request)
     {
-        MovieRecommendationResponseDTO movieRecommendationResponseDTO = movieService.getMovieRecommendationList(movieId, page);
+        MovieRecommendationResponseDTO movieRecommendationResponseDTO = movieService.getMovieRecommendationList(movieId, request);
 
         if (movieRecommendationResponseDTO == null) {
             throw new NotFoundException(MOVIE_NOT_FOUND_MESSAGE);

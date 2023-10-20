@@ -1,9 +1,6 @@
 package kr.ecocow.ecomovie.service;
 
-import kr.ecocow.ecomovie.dto.MovieDetailsDTO;
-import kr.ecocow.ecomovie.dto.MovieDetailsRequestDTO;
-import kr.ecocow.ecomovie.dto.MovieRecommendationDTO;
-import kr.ecocow.ecomovie.dto.MovieRecommendationResponseDTO;
+import kr.ecocow.ecomovie.dto.*;
 import kr.ecocow.ecomovie.repository.MovieRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.lang.Nullable;
@@ -25,7 +22,8 @@ public class MovieService {
 
     @Transactional(readOnly = true)
     // page는 1부터 시작
-    public @Nullable MovieRecommendationResponseDTO getMovieRecommendationList(Long movieId, int page) {
+    public @Nullable MovieRecommendationResponseDTO getMovieRecommendationList(Long movieId,
+                                                                               @Nullable MovieRecommendationRequestDTO movieRecommendationRequestDTO) {
         boolean movieExists = movieRepository.checkMovieExists(movieId);
         if (!movieExists) {
             return null;
@@ -39,6 +37,7 @@ public class MovieService {
 
         List<MovieRecommendationDTO> results = List.of();
 
+        int page = movieRecommendationRequestDTO == null ? 1 : movieRecommendationRequestDTO.getPage();
         if (0 < page && page <= totalPages) {
             List<Long> paginatedMovieIdList = movieIdList.subList(rowPerPage * (page - 1), Math.min(rowPerPage * page, totalResults));
             results = movieRepository.findMovieRecommendationList(paginatedMovieIdList);;
