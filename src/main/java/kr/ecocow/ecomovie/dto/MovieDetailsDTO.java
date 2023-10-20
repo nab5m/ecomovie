@@ -1,5 +1,6 @@
 package kr.ecocow.ecomovie.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -26,6 +27,8 @@ public class MovieDetailsDTO {
     private List<ProductionCompanyDTO> productionCompanies;
     private List<ProductionCountryDTO> productionCountries;
     private List<SpokenLanguageDTO> spokenLanguages;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private MovieRecommendationResponseDTO recommendations;
 
     @QueryProjection
     public MovieDetailsDTO(Movie movie, CodeItem releaseStatus, ContentVoteSummary contentVoteSummary,

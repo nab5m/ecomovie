@@ -1,5 +1,6 @@
 package kr.ecocow.ecomovie.service;
 
+import kr.ecocow.ecomovie.constant.AppendToResponse;
 import kr.ecocow.ecomovie.dto.*;
 import kr.ecocow.ecomovie.repository.MovieRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,14 +21,29 @@ public class MovieService {
     public @Nullable MovieDetailsDTO getMovieDetails(Long movieId, @Nullable MovieDetailsRequestDTO movieDetailsRequestDTO) {
         MovieDetailsDTO movieDetailsDTO = movieRepository.findMovieDetails(movieId);
 
-        if (movieDetailsDTO == null || movieDetailsDTO.getMovie() == null) {
+        if (movieDetailsDTO == null) {
             return null;
         }
+        if (movieDetailsRequestDTO == null) {
+            return movieDetailsDTO;
+        }
 
+        movieDetailsDTO = translateMovieTitle(movieDetailsRequestDTO, movieDetailsDTO);
+        movieDetailsDTO = appendToMovieDetailsResponse(movieDetailsRequestDTO, movieDetailsDTO);
+
+        return movieDetailsDTO;
+    }
+
+    private MovieDetailsDTO translateMovieTitle(MovieDetailsRequestDTO movieDetailsRequestDTO, MovieDetailsDTO movieDetailsDTO) {
         // 제목 번역 : api 무료 사용량을 고려해서 영화 상세 API의 영화 제목만 번역했습니다.
-        String sourceLanguage = movieDetailsDTO.getMovie().getOriginalLanguage();
         String targetLanguage = movieDetailsRequestDTO == null ? null : movieDetailsRequestDTO.getLanguage();
-        String originalTitle = movieDetailsDTO.getMovie().getOriginalTitle();
+        String sourceLanguage = null;
+        String originalTitle = null;
+        if (movieDetailsDTO.getMovie() != null) {
+            sourceLanguage = movieDetailsDTO.getMovie().getOriginalLanguage();
+            originalTitle = movieDetailsDTO.getMovie().getOriginalTitle();
+        }
+
         String translatedTitle = originalTitle;
         if (sourceLanguage != null && targetLanguage != null && originalTitle != null) {
             String translationResult = translationService.translate(originalTitle, sourceLanguage, targetLanguage);
@@ -36,9 +52,27 @@ public class MovieService {
             }
         }
 
-        movieDetailsDTO = movieDetailsDTO.withTitle(translatedTitle);
+        return movieDetailsDTO.withTitle(translatedTitle);
+    }
 
-        return movieDetailsDTO;
+    private MovieDetailsDTO appendToMovieDetailsResponse(MovieDetailsRequestDTO movieDetailsRequestDTO, MovieDetailsDTO movieDetailsDTO) {
+        AppendToResponse appendToResponse = movieDetailsRequestDTO.getAppend_to_response();
+        if (appendToResponse == null) {
+            return movieDetailsDTO;
+        }
+
+        switch (appendToResponse) {
+            case Recommendations:
+                if (movieDetailsDTO.getMovie() == null) {
+                    return movieDetailsDTO;
+                }
+
+                return movieDetailsDTO.toBuilder()
+                        .recommendations(getMovieRecommendationList(movieDetailsDTO.getMovie().getId(), null))
+                        .build();
+            default:
+                return movieDetailsDTO;
+        }
     }
 
     @Transactional(readOnly = true)
