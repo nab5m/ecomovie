@@ -25,7 +25,7 @@ public class MovieController {
     @GetMapping("{movieId}")
     @MovieControllerDocs.GetMovieDetails
     public MovieDetailsDTO getMovieDetails(@PathVariable long movieId,
-                                           @RequestParam(required = false) MovieDetailsRequestDTO request)
+                                           MovieDetailsRequestDTO request)
     {
         MovieDetailsDTO movieDetailsDTO = movieService.getMovieDetails(movieId, request);
 
