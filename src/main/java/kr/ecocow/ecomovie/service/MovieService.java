@@ -13,11 +13,32 @@ import java.util.List;
 @Transactional
 @RequiredArgsConstructor
 public class MovieService {
+    private final TranslationService translationService;
     private final MovieRepository movieRepository;
 
     @Transactional(readOnly = true)
     public @Nullable MovieDetailsDTO getMovieDetails(Long movieId, @Nullable MovieDetailsRequestDTO movieDetailsRequestDTO) {
-        return movieRepository.findMovieDetails(movieId);
+        MovieDetailsDTO movieDetailsDTO = movieRepository.findMovieDetails(movieId);
+
+        if (movieDetailsDTO == null || movieDetailsDTO.getMovie() == null) {
+            return null;
+        }
+
+        // 제목 번역 : api 무료 사용량을 고려해서 영화 상세 API의 영화 제목만 번역했습니다.
+        String sourceLanguage = movieDetailsDTO.getMovie().getOriginalLanguage();
+        String targetLanguage = movieDetailsRequestDTO == null ? null : movieDetailsRequestDTO.getLanguage();
+        String originalTitle = movieDetailsDTO.getMovie().getOriginalTitle();
+        String translatedTitle = originalTitle;
+        if (sourceLanguage != null && targetLanguage != null && originalTitle != null) {
+            String translationResult = translationService.translate(originalTitle, sourceLanguage, targetLanguage);
+            if (translationResult != null) {
+                translatedTitle = translationResult;
+            }
+        }
+
+        movieDetailsDTO = movieDetailsDTO.withTitle(translatedTitle);
+
+        return movieDetailsDTO;
     }
 
     @Transactional(readOnly = true)

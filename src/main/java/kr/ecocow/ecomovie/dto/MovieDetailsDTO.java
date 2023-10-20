@@ -10,9 +10,8 @@ import lombok.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
-@Builder
+@Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -43,7 +42,13 @@ public class MovieDetailsDTO {
         this.spokenLanguages = spokenLanguages.stream().map(SpokenLanguageDTO::fromEntity).toList();
     }
 
-    @Builder
+    public MovieDetailsDTO withTitle(String title) {
+        return this.toBuilder()
+                .movie(this.movie.toBuilder().title(title).build())
+                .build();
+    }
+
+    @Builder(toBuilder = true)
     @Getter
     @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
     public static class MovieDTO {
