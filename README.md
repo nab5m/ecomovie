@@ -1,8 +1,8 @@
 # EcoMovie - The Movie DB API 클론 코딩
 
 ## 링크
-- [ERD](https://www.erdcloud.com/d/hc2X7xpjGho2eFv4X)
-- [API 문서](http://ecomovie.ap-northeast-2.elasticbeanstalk.com/swagger-ui/index.html)
+- <a href="https://www.erdcloud.com/d/hc2X7xpjGho2eFv4X" target="_blank">ERD</a>
+- <a href="http://ecomovie.ap-northeast-2.elasticbeanstalk.com/swagger-ui/index.html" target="_blank">API 문서</a>
 
 ## 환경설정
 1. 실행 전 mysql 관련 환경변수 설정
