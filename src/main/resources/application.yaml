@@ -64,3 +64,10 @@ spring:
     url: jdbc:h2:mem:testdb;DATABASE_TO_LOWER=TRUE;
   flyway:
     locations: classpath:/db/migration/h2
+---
+spring:
+  config:
+    activate:
+      on-profile: production
+server:
+  port: 5000
