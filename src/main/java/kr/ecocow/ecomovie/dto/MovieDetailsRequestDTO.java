@@ -1,7 +1,6 @@
 package kr.ecocow.ecomovie.dto;
 
-import com.fasterxml.jackson.databind.PropertyNamingStrategies;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import kr.ecocow.ecomovie.constant.AppendToResponse;
 import lombok.*;
 
 @Builder
@@ -9,8 +8,8 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class MovieDetailsRequestDTO {
-    private String appendToResponse;
+    // @JsonNaming이나 @JsonProperty로 case변경 시 enum 값이 세팅되지 않는 문제가 발생
+    private AppendToResponse append_to_response;
     private String language;
 }
