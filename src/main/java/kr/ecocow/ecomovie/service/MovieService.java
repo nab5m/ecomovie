@@ -1,6 +1,7 @@
 package kr.ecocow.ecomovie.service;
 
 import kr.ecocow.ecomovie.dto.MovieDetailsDTO;
+import kr.ecocow.ecomovie.dto.MovieDetailsRequestDTO;
 import kr.ecocow.ecomovie.dto.MovieRecommendationDTO;
 import kr.ecocow.ecomovie.dto.MovieRecommendationResponseDTO;
 import kr.ecocow.ecomovie.repository.MovieRepository;
@@ -18,7 +19,7 @@ public class MovieService {
     private final MovieRepository movieRepository;
 
     @Transactional(readOnly = true)
-    public @Nullable MovieDetailsDTO getMovieDetails(Long movieId) {
+    public @Nullable MovieDetailsDTO getMovieDetails(Long movieId, @Nullable MovieDetailsRequestDTO movieDetailsRequestDTO) {
         return movieRepository.findMovieDetails(movieId);
     }
 

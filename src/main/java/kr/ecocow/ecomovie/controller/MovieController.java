@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import kr.ecocow.ecomovie.controller.exception.NotFoundException;
 import kr.ecocow.ecomovie.controller.swagger.MovieControllerDocs;
 import kr.ecocow.ecomovie.dto.MovieDetailsDTO;
+import kr.ecocow.ecomovie.dto.MovieDetailsRequestDTO;
 import kr.ecocow.ecomovie.dto.MovieRecommendationResponseDTO;
 import kr.ecocow.ecomovie.service.MovieService;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +21,10 @@ public class MovieController {
 
     @GetMapping("{movieId}")
     @MovieControllerDocs.GetMovieDetails
-    public MovieDetailsDTO getMovieDetails(@PathVariable long movieId) {
-        MovieDetailsDTO movieDetailsDTO = movieService.getMovieDetails(movieId);
+    public MovieDetailsDTO getMovieDetails(@PathVariable long movieId,
+                                           @RequestParam(required = false) MovieDetailsRequestDTO request)
+    {
+        MovieDetailsDTO movieDetailsDTO = movieService.getMovieDetails(movieId, request);
 
         if (movieDetailsDTO == null) {
             throw new NotFoundException(MOVIE_NOT_FOUND_MESSAGE);

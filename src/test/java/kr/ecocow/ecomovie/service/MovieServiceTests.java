@@ -13,7 +13,7 @@ public class MovieServiceTests {
     @Test
     @DisplayName("getMovieDetails 정상 작동하는지 확인")
     public void getMovieDetails() {
-        movieService.getMovieDetails(1L);
+        movieService.getMovieDetails(1L, null);
     }
 
     @Test
