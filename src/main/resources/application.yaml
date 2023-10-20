@@ -8,6 +8,10 @@ spring:
       develop-mysql:
         - common
         - develop
+        - mysql
+      production:
+        - common
+        - mysql
 ---
 spring:
   config:
@@ -39,7 +43,7 @@ logging:
 spring:
   config:
     activate:
-      on-profile: develop-mysql
+      on-profile: mysql
   datasource:
     url: ${SPRING_DATASOURCE_URL}
     username: ${SPRING_DATASOURCE_USERNAME}
